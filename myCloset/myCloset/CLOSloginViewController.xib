@@ -16,9 +16,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbs-Ze-qpU">
-                    <rect key="frame" x="137" y="318" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbs-Ze-qpU">
+                    <rect key="frame" x="137" y="269" width="46" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="C79-oG-X5J"/>
+                        <constraint firstAttribute="width" constant="46" id="b9S-QC-AIU"/>
+                    </constraints>
                     <state key="normal" title="Login">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -26,21 +30,30 @@
                         <action selector="login:" destination="-1" eventType="touchUpInside" id="4Qp-24-SYl"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jOV-6y-mdk">
-                    <rect key="frame" x="54" y="220" width="213" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jOV-6y-mdk">
+                    <rect key="frame" x="54" y="175" width="213" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="hv1-GU-i53"/>
+                    </connections>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2RT-G2-fSe">
-                    <rect key="frame" x="54" y="271" width="213" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2RT-G2-fSe">
+                    <rect key="frame" x="54" y="222" width="213" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="dXL-0b-fXp"/>
+                    </connections>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFB-oD-VJ8">
-                    <rect key="frame" x="89" y="346" width="143" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFB-oD-VJ8">
+                    <rect key="frame" x="89" y="307" width="143" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="143" id="akl-Sd-uEB"/>
+                    </constraints>
                     <state key="normal" title="Make a new account">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -50,6 +63,18 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="IFB-oD-VJ8" firstAttribute="top" secondItem="Gbs-Ze-qpU" secondAttribute="bottom" constant="8" id="8yk-8D-K6l"/>
+                <constraint firstAttribute="centerX" secondItem="IFB-oD-VJ8" secondAttribute="centerX" constant="-0.5" id="MWM-T6-cov"/>
+                <constraint firstItem="2RT-G2-fSe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="54" id="PmS-4g-kWi"/>
+                <constraint firstItem="Gbs-Ze-qpU" firstAttribute="top" secondItem="2RT-G2-fSe" secondAttribute="bottom" constant="17" id="V3T-cQ-BrX"/>
+                <constraint firstAttribute="centerY" secondItem="Gbs-Ze-qpU" secondAttribute="centerY" id="VJT-Fg-eSE"/>
+                <constraint firstAttribute="centerX" secondItem="Gbs-Ze-qpU" secondAttribute="centerX" id="X83-Ne-pAA"/>
+                <constraint firstItem="jOV-6y-mdk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="54" id="X85-jz-GHy"/>
+                <constraint firstItem="2RT-G2-fSe" firstAttribute="top" secondItem="jOV-6y-mdk" secondAttribute="bottom" constant="17" id="bD2-QZ-SpX"/>
+                <constraint firstAttribute="trailing" secondItem="jOV-6y-mdk" secondAttribute="trailing" constant="53" id="uh0-Gh-c1Y"/>
+                <constraint firstAttribute="trailing" secondItem="2RT-G2-fSe" secondAttribute="trailing" constant="53" id="znR-ak-DTi"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

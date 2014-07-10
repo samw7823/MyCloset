@@ -14,7 +14,8 @@
 #import "CLOSInventoryViewController.h"
 #import <Parse/Parse.h>
 
-@interface CLOSsignUpViewController ()
+@interface CLOSsignUpViewController () <UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 
@@ -27,6 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     }
     return self;
 }
@@ -82,7 +84,17 @@
     [self.view endEditing:YES];
 }
 
-
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.username) {
+        [textField resignFirstResponder];
+        [self.password becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+        [self signUp:textField];
+    }
+    return YES;
+}
 
 - (IBAction)toLogin:(id)sender {
     

@@ -16,7 +16,8 @@
 
 #import <Parse/Parse.h>
 
-@interface CLOSloginViewController ()
+@interface CLOSloginViewController () <UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 
@@ -29,7 +30,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-//        self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        self.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     }
     return self;
 }
@@ -64,6 +65,7 @@
     
     
     [self presentViewController:tbc animated:YES completion:nil];
+
     } else {
         NSLog(@"Error logging in: %@", error);
     }
@@ -73,9 +75,26 @@
     
     CLOSsignUpViewController *signUpvc = [[CLOSsignUpViewController alloc] init];
     [self presentViewController:signUpvc animated:YES completion:nil];
-    
+
     
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveUp:) name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveDown:) name:UIKeyboardWillHideNotification object:nil];
+
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -84,13 +103,95 @@
                                    initWithTarget:self
                                    action:@selector(backgroundTouched)];
     [self.view addGestureRecognizer:tap];
+    PFUser *currentUser = [PFUser currentUser];
+    
+    //Is user cached?
+    if (currentUser) {
+        NSLog(@"There is current user");
+        //set up tabbar view controller
+        CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
+        profvc.title = @"Profile";
+        CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
+        camvc.title = @"Camera";
+        CLOSSearchViewController *searchvc = [[CLOSSearchViewController alloc] init];
+        searchvc.title = @"Search";
+        CLOSInventoryViewController *invenvc = [[CLOSInventoryViewController alloc] init];
+        invenvc.title = @"Inventory";
+        
+        
+        UITabBarController *tbc = [[UITabBarController alloc] init];
+        
+        tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
+        
+        [self presentViewController:tbc animated:YES completion:nil];
+    }
 
 }
+
+////Animations to move up/down view when keyboard appears/disappears
+//-(void)moveUp:(NSNotification *)aNotification
+//{
+//    //Get user info
+//    NSDictionary *userInfo = [aNotification userInfo];
+//    
+//    NSTimeInterval animationDuration;
+//    UIViewAnimationCurve animationCurve;
+//    CGRect keyboardFrame;
+//    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+//    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
+//    
+//    [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
+//     //animate
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationCurve:animationCurve];
+//    [UIView setAnimationDuration:animationDuration];
+//    
+//    [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - keyboardFrame.size.height / 4, self.view.frame.size.width, self.view.frame.size.height)];
+//    
+//    [UIView commitAnimations];
+//}
+//
+//-(void)moveDown:(NSNotification *)aNotification
+//{
+//    //Get user info
+//    NSDictionary *userInfo = [aNotification userInfo];
+//    
+//    NSTimeInterval animationDuration;
+//    UIViewAnimationCurve animationCurve;
+//    CGRect keyboardFrame;
+//    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
+//    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
+//    
+//    
+//    [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
+//    //animate
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationCurve:animationCurve];
+//    [UIView setAnimationDuration:animationDuration];
+//    
+//    [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + keyboardFrame.size.height / 4, self.view.frame.size.width, self.view.frame.size.height)];
+//
+//    [UIView commitAnimations];
+//}
+
+
+
 
 - (IBAction)backgroundTouched {
     [self.view endEditing:YES];
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.username) {
+        [textField resignFirstResponder];
+        [self.password becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+        [self login:textField];
+    }
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning
 {
