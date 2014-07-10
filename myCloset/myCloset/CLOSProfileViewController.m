@@ -7,8 +7,13 @@
 //
 
 #import "CLOSProfileViewController.h"
+#import <Parse/Parse.h>
+#import "CLOSClosetCell.h"
 
-@interface CLOSProfileViewController ()
+@interface CLOSProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (strong, nonatomic) PFUser *user;
 
 @end
 
@@ -26,7 +31,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    [self.collectionView registerClass:[CLOSClosetCell class] forCellWithReuseIdentifier:@"ClosetCell"];
+    
+}
+
+- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ClosetCell" forIndexPath:indexPath];
+    
+    // set cell properties to current user
+    
+    return cell;
+}
+
+- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 1;
+    // return [self.user[@"Closets] count];
 }
 
 - (void)didReceiveMemoryWarning
