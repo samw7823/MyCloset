@@ -32,13 +32,32 @@
 {
     [super viewDidLoad];
     
-    [self.collectionView registerClass:[CLOSClosetCell class] forCellWithReuseIdentifier:@"ClosetCell"];
+    //[self.collectionView registerClass:[CLOSClosetCell class] forCellWithReuseIdentifier:@"ClosetCell"];
+    //[self.collectionView registerNib:CLOSClosetCell forCellWithReuseIdentifier:@"ClosetCell"];
+    UINib *cellNib = [UINib nibWithNibName:@"CLOSClosetCell" bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ClosetCell"];
+    
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setItemSize:CGSizeMake(200, 200)];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    
+    [self.collectionView setCollectionViewLayout:flowLayout];
     
 }
 
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ClosetCell" forIndexPath:indexPath];
+    
+    UILabel *titleLabel = (UILabel *)[cell viewWithTag:100];
+    
+    [titleLabel setText:@"closet"];
+    
+    UIImageView *imageView = (UIImageView *)[cell viewWithTag:50];
+    [imageView setImage:[UIImage imageNamed:@"closetDoor.png"]];
+    
+    //cell.backgroundColor = [UIColor greenColor];
+    
     
     // set cell properties to current user
     
