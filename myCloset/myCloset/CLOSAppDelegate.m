@@ -23,6 +23,8 @@
     [Parse setApplicationId:@"r0QEPBDtR7d2FdgkCclWCmrBE0Ae48GlPB8tdz96"
                   clientKey:@"XtEqInDDzls72AVG6yUI5ugT9xPHak1ekIuDBJwS"];
     
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
     CLOSloginViewController *loginvc = [[CLOSloginViewController alloc] init];
     
     self.window.rootViewController = loginvc;

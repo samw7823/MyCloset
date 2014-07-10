@@ -12,8 +12,13 @@
 #import "CLOSSearchViewController.h"
 #import "CLOSCameraViewController.h"
 #import "CLOSInventoryViewController.h"
+#import "CLOSsignUpViewController.h"
+
+#import <Parse/Parse.h>
 
 @interface CLOSloginViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *username;
+@property (weak, nonatomic) IBOutlet UITextField *password;
 
 @end
 
@@ -28,10 +33,44 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    PFUser *currentUser = [PFUser currentUser];
+    
+    //Is user cached?
+    if (currentUser) {
+        
+        //set up tabbar view controller
+        CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
+        profvc.title = @"Profile";
+        CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
+        camvc.title = @"Camera";
+        CLOSSearchViewController *searchvc = [[CLOSSearchViewController alloc] init];
+        searchvc.title = @"Search";
+        CLOSInventoryViewController *invenvc = [[CLOSInventoryViewController alloc] init];
+        invenvc.title = @"Inventory";
+        
+        
+        UITabBarController *tbc = [[UITabBarController alloc] init];
+        
+        tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
+        
+        [self presentViewController:tbc animated:YES completion:nil];
+    }
+}
 
--(IBAction)buttonTapped:(id)sender
+-(IBAction)login:(id)sender
 {
 
+    [self.view endEditing:YES];
+    
+    NSError *error;
+    
+    [PFUser logInWithUsername:self.username.text password:self.password.text error: &error];
+    
+    if ([PFUser currentUser]) {
     //TODO: Bring out tab bar once logged in; possibly using NAVIGATION CONTROLLER
     CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
     profvc.title = @"Profile";
@@ -49,6 +88,17 @@
     
     
     [self presentViewController:tbc animated:YES completion:nil];
+    } else {
+        NSLog(@"Error logging in: %@", error);
+    }
+}
+- (IBAction)makeNewAccount:(id)sender {
+    [self.view endEditing:YES];
+    
+    CLOSsignUpViewController *signUpvc = [[CLOSsignUpViewController alloc] init];
+    [self presentViewController:signUpvc animated:YES completion:nil];
+    
+    
 }
 - (void)viewDidLoad
 {

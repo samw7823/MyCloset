@@ -12,8 +12,11 @@
 #import "CLOSSearchViewController.h"
 #import "CLOSCameraViewController.h"
 #import "CLOSInventoryViewController.h"
+#import <Parse/Parse.h>
 
 @interface CLOSsignUpViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *username;
+@property (weak, nonatomic) IBOutlet UITextField *password;
 
 @end
 
@@ -36,26 +39,47 @@
 
 
 
--(IBAction)buttonTapped:(id)sender
+-(IBAction)signUp:(id)sender
 {
+    [self.view endEditing:YES];
+    PFUser *user = [PFUser user];
+    user.username = self.username.text;
+    user.password = self.password.text;
     
-    //TODO: Bring out tab bar once logged in; possibly using NAVIGATION CONTROLLER
-    CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
-    profvc.title = @"Profile";
-    CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
-    camvc.title = @"Camera";
-    CLOSSearchViewController *searchvc = [[CLOSSearchViewController alloc] init];
-    searchvc.title = @"Search";
-    CLOSInventoryViewController *invenvc = [[CLOSInventoryViewController alloc] init];
-    invenvc.title = @"Inventory";
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Signed Up");
+            //TODO: Bring out tab bar once logged in; possibly using NAVIGATION CONTROLLER
+            CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
+            profvc.title = @"Profile";
+            CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
+            camvc.title = @"Camera";
+            CLOSSearchViewController *searchvc = [[CLOSSearchViewController alloc] init];
+            searchvc.title = @"Search";
+            CLOSInventoryViewController *invenvc = [[CLOSInventoryViewController alloc] init];
+            invenvc.title = @"Inventory";
+            
+            
+            UITabBarController *tbc = [[UITabBarController alloc] init];
+            
+            tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
+            
+            
+            [self presentViewController:tbc animated:YES completion:nil];
+        } else {
+            NSLog(@"Sign up failed with error: %@", error);
+        }
+    }];
+
+}
+
+
+
+
+- (IBAction)toLogin:(id)sender {
     
+    [self dismissViewControllerAnimated:YES completion:nil];
     
-    UITabBarController *tbc = [[UITabBarController alloc] init];
-    
-    tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
-    
-    
-    [self presentViewController:tbc animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning
 {

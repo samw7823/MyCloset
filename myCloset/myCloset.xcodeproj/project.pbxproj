@@ -28,6 +28,8 @@
 		138A7C88196F0BB4008AD0E9 /* CLOSCreateClosetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 138A7C86196F0BB4008AD0E9 /* CLOSCreateClosetViewController.xib */; };
 		138A7C8C196F0BBE008AD0E9 /* CLOSCreateItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 138A7C8A196F0BBE008AD0E9 /* CLOSCreateItemViewController.m */; };
 		138A7C8D196F0BBE008AD0E9 /* CLOSCreateItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 138A7C8B196F0BBE008AD0E9 /* CLOSCreateItemViewController.xib */; };
+		138A7C90196F2669008AD0E9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138A7C8E196F2669008AD0E9 /* Accounts.framework */; };
+		138A7C91196F2669008AD0E9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138A7C8F196F2669008AD0E9 /* Social.framework */; };
 		EAC0B323196F04DA004E310D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC0B322196F04DA004E310D /* Foundation.framework */; };
 		EAC0B325196F04DA004E310D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC0B324196F04DA004E310D /* CoreGraphics.framework */; };
 		EAC0B327196F04DA004E310D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC0B326196F04DA004E310D /* UIKit.framework */; };
@@ -95,6 +97,8 @@
 		138A7C89196F0BBE008AD0E9 /* CLOSCreateItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLOSCreateItemViewController.h; sourceTree = "<group>"; };
 		138A7C8A196F0BBE008AD0E9 /* CLOSCreateItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLOSCreateItemViewController.m; sourceTree = "<group>"; };
 		138A7C8B196F0BBE008AD0E9 /* CLOSCreateItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLOSCreateItemViewController.xib; sourceTree = "<group>"; };
+		138A7C8E196F2669008AD0E9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		138A7C8F196F2669008AD0E9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		EAC0B31F196F04DA004E310D /* myCloset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myCloset.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAC0B322196F04DA004E310D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EAC0B324196F04DA004E310D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -128,6 +132,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				138A7C90196F2669008AD0E9 /* Accounts.framework in Frameworks */,
+				138A7C91196F2669008AD0E9 /* Social.framework in Frameworks */,
 				EAC0B35C196F0575004E310D /* AudioToolbox.framework in Frameworks */,
 				EAC0B35D196F0575004E310D /* CFNetwork.framework in Frameworks */,
 				EAC0B35E196F0575004E310D /* CoreLocation.framework in Frameworks */,
@@ -180,6 +186,8 @@
 		EAC0B321196F04DA004E310D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				138A7C8E196F2669008AD0E9 /* Accounts.framework */,
+				138A7C8F196F2669008AD0E9 /* Social.framework */,
 				EAC0B353196F0575004E310D /* AudioToolbox.framework */,
 				EAC0B354196F0575004E310D /* CFNetwork.framework */,
 				EAC0B355196F0575004E310D /* CoreLocation.framework */,
