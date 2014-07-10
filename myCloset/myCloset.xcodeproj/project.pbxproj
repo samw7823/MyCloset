@@ -30,6 +30,7 @@
 		138A7C8D196F0BBE008AD0E9 /* CLOSCreateItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 138A7C8B196F0BBE008AD0E9 /* CLOSCreateItemViewController.xib */; };
 		138A7C90196F2669008AD0E9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138A7C8E196F2669008AD0E9 /* Accounts.framework */; };
 		138A7C91196F2669008AD0E9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138A7C8F196F2669008AD0E9 /* Social.framework */; };
+		BF939ECF196F364300BBEC72 /* CLOSClosetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF939ECE196F364300BBEC72 /* CLOSClosetCell.m */; };
 		EAC0B323196F04DA004E310D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC0B322196F04DA004E310D /* Foundation.framework */; };
 		EAC0B325196F04DA004E310D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC0B324196F04DA004E310D /* CoreGraphics.framework */; };
 		EAC0B327196F04DA004E310D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC0B326196F04DA004E310D /* UIKit.framework */; };
@@ -99,6 +100,8 @@
 		138A7C8B196F0BBE008AD0E9 /* CLOSCreateItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLOSCreateItemViewController.xib; sourceTree = "<group>"; };
 		138A7C8E196F2669008AD0E9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		138A7C8F196F2669008AD0E9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		BF939ECD196F364300BBEC72 /* CLOSClosetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLOSClosetCell.h; path = ../CLOSClosetCell.h; sourceTree = "<group>"; };
+		BF939ECE196F364300BBEC72 /* CLOSClosetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLOSClosetCell.m; path = ../CLOSClosetCell.m; sourceTree = "<group>"; };
 		EAC0B31F196F04DA004E310D /* myCloset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myCloset.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAC0B322196F04DA004E310D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EAC0B324196F04DA004E310D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -212,6 +215,8 @@
 				EAC0B332196F04DA004E310D /* CLOSAppDelegate.m */,
 				EAC0B334196F04DA004E310D /* Images.xcassets */,
 				EAC0B329196F04DA004E310D /* Supporting Files */,
+				BF939ECD196F364300BBEC72 /* CLOSClosetCell.h */,
+				BF939ECE196F364300BBEC72 /* CLOSClosetCell.m */,
 				138A7C59196F09FB008AD0E9 /* CLOSloginViewController.h */,
 				138A7C5A196F09FB008AD0E9 /* CLOSloginViewController.m */,
 				138A7C5B196F09FB008AD0E9 /* CLOSloginViewController.xib */,
@@ -395,6 +400,7 @@
 				138A7C66196F0AE5008AD0E9 /* CLOSProfileViewController.m in Sources */,
 				138A7C73196F0B5A008AD0E9 /* CLOSInventoryViewController.m in Sources */,
 				138A7C87196F0BB4008AD0E9 /* CLOSCreateClosetViewController.m in Sources */,
+				BF939ECF196F364300BBEC72 /* CLOSClosetCell.m in Sources */,
 				138A7C61196F0A26008AD0E9 /* CLOSsignUpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
