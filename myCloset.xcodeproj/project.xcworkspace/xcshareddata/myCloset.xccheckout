@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3F654044-207A-4ADB-B1FE-0144F0CEB836</string>
+	<key>IDESourceControlProjectName</key>
+	<string>myCloset</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AD144FF6-2AA3-4A94-893C-66164A10AB85</key>
+		<string>https://github.com/samw7823/MyCloset.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>myCloset.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AD144FF6-2AA3-4A94-893C-66164A10AB85</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/samw7823/MyCloset.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AD144FF6-2AA3-4A94-893C-66164A10AB85</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AD144FF6-2AA3-4A94-893C-66164A10AB85</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MyClosetGit</string>
+		</dict>
+	</array>
+</dict>
+</plist>
