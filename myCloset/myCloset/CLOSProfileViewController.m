@@ -32,14 +32,13 @@
 {
     [super viewDidLoad];
     
-    //[self.collectionView registerClass:[CLOSClosetCell class] forCellWithReuseIdentifier:@"ClosetCell"];
-    //[self.collectionView registerNib:CLOSClosetCell forCellWithReuseIdentifier:@"ClosetCell"];
+
     UINib *cellNib = [UINib nibWithNibName:@"CLOSClosetCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ClosetCell"];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(200, 200)];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    [flowLayout setItemSize:CGSizeMake(150, 150)];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     [self.collectionView setCollectionViewLayout:flowLayout];
     
@@ -56,18 +55,16 @@
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:50];
     [imageView setImage:[UIImage imageNamed:@"closetDoor.png"]];
     
-    //cell.backgroundColor = [UIColor greenColor];
     
-    
-    // set cell properties to current user
+    //TODO: set cell properties to current user
     
     return cell;
 }
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 1;
-    // return [self.user[@"Closets] count];
+    return 15;
+    // TODO: return [self.user[@"Closets] count];
 }
 
 - (void)didReceiveMemoryWarning
