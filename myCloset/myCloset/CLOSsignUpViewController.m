@@ -35,6 +35,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(backgroundTouched)];
+    [self.view addGestureRecognizer:tap];
 }
 
 
@@ -73,6 +77,10 @@
 
 }
 
+
+- (IBAction)backgroundTouched {
+    [self.view endEditing:YES];
+}
 
 
 

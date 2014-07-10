@@ -9,6 +9,11 @@
 #import "CLOSAppDelegate.h"
 #import <Parse/Parse.h>
 #import "CLOSloginViewController.h"
+#import "CLOSProfileViewController.h"
+#import "CLOSSearchViewController.h"
+#import "CLOSCameraViewController.h"
+#import "CLOSInventoryViewController.h"
+#import "CLOSsignUpViewController.h"
 
 @interface CLOSAppDelegate () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
@@ -25,10 +30,33 @@
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    CLOSloginViewController *loginvc = [[CLOSloginViewController alloc] init];
+    PFUser *currentUser = [PFUser currentUser];
     
-    self.window.rootViewController = loginvc;
+    //Is user cached?
+    if (currentUser) {
+        NSLog(@"There is current user");
+        //set up tabbar view controller
+        CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
+        profvc.title = @"Profile";
+        CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
+        camvc.title = @"Camera";
+        CLOSSearchViewController *searchvc = [[CLOSSearchViewController alloc] init];
+        searchvc.title = @"Search";
+        CLOSInventoryViewController *invenvc = [[CLOSInventoryViewController alloc] init];
+        invenvc.title = @"Inventory";
+        
+        
+        UITabBarController *tbc = [[UITabBarController alloc] init];
+        
+        tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
+        
+        self.window.rootViewController = tbc;
+    } else {
+
+        CLOSloginViewController *loginvc = [[CLOSloginViewController alloc] init];
     
+        self.window.rootViewController = loginvc;
+    }
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
