@@ -32,7 +32,7 @@
 -(IBAction)buttonTapped:(id)sender
 {
 
-    //TODO: Bring out tab bar once logged in
+    //TODO: Bring out tab bar once logged in; possibly using NAVIGATION CONTROLLER
     CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
     profvc.title = @"Profile";
     CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
