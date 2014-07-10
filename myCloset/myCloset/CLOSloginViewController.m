@@ -8,6 +8,11 @@
 
 #import "CLOSloginViewController.h"
 
+#import "CLOSProfileViewController.h"
+#import "CLOSSearchViewController.h"
+#import "CLOSCameraViewController.h"
+#import "CLOSInventoryViewController.h"
+
 @interface CLOSloginViewController ()
 
 @end
@@ -28,9 +33,22 @@
 {
 
     //TODO: Bring out tab bar once logged in
+    CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
+    profvc.title = @"Profile";
+    CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
+    camvc.title = @"Camera";
+    CLOSSearchViewController *searchvc = [[CLOSSearchViewController alloc] init];
+    searchvc.title = @"Search";
+    CLOSInventoryViewController *invenvc = [[CLOSInventoryViewController alloc] init];
+    invenvc.title = @"Inventory";
+    
     
     UITabBarController *tbc = [[UITabBarController alloc] init];
-//    [self
+    
+    tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
+    
+    
+    [self presentViewController:tbc animated:YES completion:nil];
 }
 - (void)viewDidLoad
 {

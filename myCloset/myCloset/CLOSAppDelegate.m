@@ -8,6 +8,7 @@
 
 #import "CLOSAppDelegate.h"
 #import <Parse/Parse.h>
+#import "CLOSloginViewController.h"
 
 @interface CLOSAppDelegate () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
@@ -21,6 +22,10 @@
     // Override point for customization after application launch.
     [Parse setApplicationId:@"r0QEPBDtR7d2FdgkCclWCmrBE0Ae48GlPB8tdz96"
                   clientKey:@"XtEqInDDzls72AVG6yUI5ugT9xPHak1ekIuDBJwS"];
+    
+    CLOSloginViewController *loginvc = [[CLOSloginViewController alloc] init];
+    
+    self.window.rootViewController = loginvc;
     
     
     self.window.backgroundColor = [UIColor whiteColor];
