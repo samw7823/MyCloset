@@ -9,6 +9,11 @@
 #import "CLOSAppDelegate.h"
 #import <Parse/Parse.h>
 #import "CLOSloginViewController.h"
+#import "CLOSProfileViewController.h"
+#import "CLOSSearchViewController.h"
+#import "CLOSCameraViewController.h"
+#import "CLOSInventoryViewController.h"
+#import "CLOSsignUpViewController.h"
 
 @interface CLOSAppDelegate () <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
@@ -25,10 +30,11 @@
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    CLOSloginViewController *loginvc = [[CLOSloginViewController alloc] init];
+
+        CLOSloginViewController *loginvc = [[CLOSloginViewController alloc] init];
     
-    self.window.rootViewController = loginvc;
-    
+        self.window.rootViewController = loginvc;
+
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
