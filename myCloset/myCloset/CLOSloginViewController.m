@@ -121,7 +121,10 @@
         
         UITabBarController *tbc = [[UITabBarController alloc] init];
         
-        tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
+        //TODO: Do we want logout on the tab bar or only on profile?
+//        tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
+//        UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logOut)];
+//        [tbc setToolbarItems:@[logout]];
         
         [self presentViewController:tbc animated:YES completion:nil];
     }
