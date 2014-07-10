@@ -12,8 +12,8 @@
 
 @interface CLOSProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) PFUser *user;
+@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
 @end
 
@@ -24,6 +24,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+
     }
     return self;
 }
@@ -32,7 +33,11 @@
 {
     [super viewDidLoad];
     
+    self.user = [PFUser currentUser];
+    NSString *username = [NSString stringWithFormat:@"%@'s closets",self.user.username];
+    self.navBar.topItem.title = username;
 
+    
     UINib *cellNib = [UINib nibWithNibName:@"CLOSClosetCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ClosetCell"];
     
