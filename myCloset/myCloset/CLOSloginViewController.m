@@ -88,21 +88,9 @@
 
 }
 
-
--(void)viewWillDisappear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(backgroundTouched)];
-    [self.view addGestureRecognizer:tap];
+    [super viewDidAppear:animated];
     PFUser *currentUser = [PFUser currentUser];
     
     //Is user cached?
@@ -122,12 +110,29 @@
         UITabBarController *tbc = [[UITabBarController alloc] init];
         
         //TODO: Do we want logout on the tab bar or only on profile?
-//        tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
-//        UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logOut)];
-//        [tbc setToolbarItems:@[logout]];
+                tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
+        //        UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logOut)];
+        //        [tbc setToolbarItems:@[logout]];
         
         [self presentViewController:tbc animated:YES completion:nil];
     }
+
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(backgroundTouched)];
+    [self.view addGestureRecognizer:tap];
 
 }
 
