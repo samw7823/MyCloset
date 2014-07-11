@@ -7,8 +7,9 @@
 //
 
 #import "CLOSCameraViewController.h"
+#import "CLOSCreateItemViewController.h"
 
-@interface CLOSCameraViewController ()
+@interface CLOSCameraViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @end
 
@@ -19,15 +20,44 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+
     }
     return self;
 }
 
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
 }
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.allowsEditing = YES;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera || UIImagePickerControllerSourceTypePhotoLibrary;
+    } else {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    imagePicker.delegate = self;
+    self.hidesBottomBarWhenPushed = YES;
+    [self presentViewController:imagePicker animated:YES completion:NULL];
+
+    
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    //Get picked image from info dictionary and create a new item
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+    CLOSCreateItemViewController *createItemvc = [[CLOSCreateItemViewController alloc] init];
+    createItemvc.image = image;
+    [picker presentViewController:createItemvc animated:YES completion:NULL];
+
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {

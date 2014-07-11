@@ -10,4 +10,5 @@
 
 @interface CLOSCreateItemViewController : UIViewController
 
+@property (nonatomic) UIImage *image;
 @end
