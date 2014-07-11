@@ -56,7 +56,6 @@
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     [self.collectionView setCollectionViewLayout:flowLayout];
-git 
     
     self.user = [PFUser currentUser];
     PFQuery *closetsQuery = [PFQuery queryWithClassName:@"Closet"];
