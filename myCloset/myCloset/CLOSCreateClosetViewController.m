@@ -27,16 +27,16 @@
 }
 - (IBAction)donePressed:(id)sender
 {
-    PFUser *currentUser = [PFUser currentUser];
-    
+   // PFUser *currentUser = [PFUser currentUser];
+    PFUser *u = [PFUser currentUser];
     
     PFObject *closet = [PFObject objectWithClassName:@"Closet"];
     closet[@"name"] = self.nameTextField.text;
+    closet[@"owner"] = u;
     [closet save];
-    PFUser *u = [PFUser currentUser];
+
     PFRelation *relation = [u relationForKey:@"ownedClosets"];
     [relation addObject:closet];
-    //closet[@"owner"] = currentUser;
     //TODO: allow user to choose own image
    // PFFile *file = [PFFile fileWithName:@"closetDoorImage" contentsAtPath:[[NSBundle mainBundle] pathForResource:@"closetDoor" ofType:@".png"]];
     //closet[@"image"] = file;
