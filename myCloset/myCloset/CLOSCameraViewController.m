@@ -18,6 +18,9 @@
 
 @implementation CLOSCameraViewController
 
+
+//TODO: customize camera to allow picking and capturing
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -41,31 +44,32 @@
     imagePicker.allowsEditing = YES;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        
-        UIBarButtonItem *switchButton = [[UIBarButtonItem alloc] initWithTitle: @"to Photos" style: UIBarButtonItemStylePlain target:self action:@selector(switchCamera:)];
-        imagePicker.toolbarItems = @[switchButton];
+//        UIBarButtonItem *switchButton = [[UIBarButtonItem alloc] initWithTitle: @"Library" style: UIBarButtonItemStylePlain target:self action:@selector(switchCamera:)];
+//        imagePicker.navigationItem.leftBarButtonItem = switchButton;
+//        imagePicker.navigationItem.title = @"Take photo";
+//        imagePicker.navigationBarHidden = NO;
     } else {
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     imagePicker.delegate = self;
     self.imagePicker = imagePicker;
-    self.hidesBottomBarWhenPushed = YES;
+    //self.hidesBottomBarWhenPushed = YES;
     [self presentViewController:imagePicker animated:YES completion:NULL];
 
     
 }
 
--(void)switchCamera:(id)sender
-{
-    if ([((UIBarButtonItem *)sender).title isEqual:@"to Photos"]) {
-        self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        ((UIBarButtonItem *)sender).title = @"to Camera";
-    } else {
-        self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        ((UIBarButtonItem *)sender).title = @"to Photos";
-
-    }
-}
+//-(void)switchCamera:(id)sender
+//{
+//    if ([((UIBarButtonItem *)sender).title isEqual:@"to Photos"]) {
+//        self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//        ((UIBarButtonItem *)sender).title = @"to Camera";
+//    } else {
+//        self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        ((UIBarButtonItem *)sender).title = @"to Photos";
+//
+//    }
+//}
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     //Get picked image from info dictionary and create a new item
