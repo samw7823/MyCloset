@@ -12,6 +12,8 @@
 #import "CLOSAddItemToClosetViewController.h"
 @interface CLOSCreateItemViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *closetSelectedLabel;
+
 
 @end
 
@@ -33,6 +35,14 @@
     // Do any additional setup after loading the view from its nib.
     if (self.image) self.imageView.image = self.image;
 }
+
+//- (void) viewWillAppear:(BOOL)animated
+//{
+//    if (self.closetId)
+//    {
+//        self.closetSelectedLabel
+//    }
+//}
 
 
 - (IBAction)finishCreating:(id)sender {

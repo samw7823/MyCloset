@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CLOSCreateItemViewController : UIViewController
-
+@property (strong, nonatomic) NSString *closetId;
 @property (nonatomic) UIImage *image;
 @end
