@@ -9,6 +9,7 @@
 #import "CLOSProfileViewController.h"
 #import <Parse/Parse.h>
 #import "CLOSClosetCell.h"
+#import "CLOSCreateClosetViewController.h"
 
 @interface CLOSProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -47,6 +48,22 @@
     
     [self.collectionView setCollectionViewLayout:flowLayout];
     
+
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.collectionView reloadData];
+    [self.user saveInBackground];
+}
+
+- (IBAction)addCloset:(id)sender
+{
+    CLOSCreateClosetViewController *createClosetvc = [[CLOSCreateClosetViewController alloc] init];
+    [self presentViewController:createClosetvc animated:YES completion:NULL];
 }
 
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -68,8 +85,7 @@
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 15;
-    // TODO: return [self.user[@"Closets] count];
+     return [self.user[@"ownedClosets"] count];
 }
 
 - (void)didReceiveMemoryWarning

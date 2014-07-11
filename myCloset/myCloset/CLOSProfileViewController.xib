@@ -32,10 +32,16 @@
                     </connections>
                 </collectionView>
                 <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jsS-PR-I3K">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="16" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <items>
-                        <navigationItem title="Title" id="m49-f5-pGd"/>
+                        <navigationItem title="Title" id="m49-f5-pGd">
+                            <barButtonItem key="rightBarButtonItem" systemItem="add" id="NXW-Mr-5jf">
+                                <connections>
+                                    <action selector="addCloset:" destination="-1" id="7en-dZ-QG4"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
                     </items>
                 </navigationBar>
             </subviews>
