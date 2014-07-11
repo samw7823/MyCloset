@@ -20,7 +20,7 @@
 @property (strong, nonatomic) NSArray *myClosets;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-
+@property (nonatomic) PFObject *selectedCloset;
 
 @end
 
@@ -40,6 +40,7 @@
     [self presentViewController:createClosetvc animated:YES completion:NULL];
 
 }
+
 
 - (void)viewDidLoad
 {
@@ -66,9 +67,8 @@
     NSString *username = [NSString stringWithFormat:@"%@'s closets",self.user.username];
     self.navBar.topItem.title = username;
     
-    
-
-    
+    self.collectionView.allowsSelection = YES;
+    self.collectionView.allowsMultipleSelection = NO;
 
     
 }
@@ -98,19 +98,26 @@
     return cell;
 }
 
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    //TODO: get the selected cell, and the closet name associated with teh selected cell
-//    // then add the item object that is passed to that closet.
-//    
-//
-//}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    //TODO: get the selected cell, and the closet name associated with teh selected cell
+    // then add the item object that is passed to that closet.
+    self.selectedCloset = self.myClosets[indexPath.row];
+
+}
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [self.myClosets count];
 }
 
+- (IBAction)donePressed:(id)sender {
+    if (self.selectedCloset) {
+        //TODO: add item to property to update it
+    }
+}
+
+//TODO: create canelPressed method
 
 - (void)didReceiveMemoryWarning
 {
