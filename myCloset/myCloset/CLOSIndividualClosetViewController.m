@@ -23,6 +23,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        //TODO: change this if not displaying current user's closet
+        self.user = [PFUser currentUser];
+
+        
         
     }
     return self;
@@ -35,10 +39,6 @@
     NSString *title = [NSString stringWithFormat:@"items in %@",self.closet[@"name"]];
     self.navigationItem.title = title;
     
-   // UIBarButtonItem
-   // self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] init];
-   // self.navigationItem.rightBarButtonItem
-    
     UINib *cellNib = [UINib nibWithNibName:@"CLOSClosetCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ClosetCell"];
     
@@ -47,6 +47,27 @@
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     [self.collectionView setCollectionViewLayout:flowLayout];
+    
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
+    self.navigationItem.rightBarButtonItem = addButton;
+    
+    
+    //TODO: move this code to be run after a new item is created so that it is added to a certain closet
+    PFObject *sampleItem = [[PFObject alloc] initWithClassName:@"Item"];
+    //        sampleItem[@"itemOwner"] = [PFUser currentUser];
+    sampleItem[@"name"] = @"Rachel's item ";
+    [sampleItem save];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Closet"];
+    PFObject *closetToAddTo = [query getObjectWithId:self.closet.objectId];
+    [closetToAddTo addObject:sampleItem forKey:@"itemsInCloset"];
+    [closetToAddTo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        self.closet = closetToAddTo;
+        [self.collectionView reloadData];
+    }];
+    
+    // end TODO
+    
 
 }
 
@@ -61,12 +82,12 @@
     UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ClosetCell" forIndexPath:indexPath];
     
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:100];
-    [titleLabel setText:@"ITEM"];
-/*    NSArray *items = self.closet[@"itemsInCloset"];
+   // [titleLabel setText:@"ITEM"];
+    NSArray *items = self.closet[@"itemsInCloset"];
     PFObject *item = items[indexPath.row];
     
     NSString *itemName = item[@"name"];
-    [titleLabel setText:itemName]; */
+    [titleLabel setText:itemName];
     
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:50];
   //  [imageView setImage:[UIImage imageNamed:@"closetDoor.png"]];
@@ -87,8 +108,7 @@
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    //return [self.closet[@"itemsInCloset"] count];
-    return 10;
+    return [self.closet[@"itemsInCloset"] count];
 }
 
 @end

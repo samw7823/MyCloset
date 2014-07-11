@@ -12,5 +12,6 @@
 @interface CLOSIndividualClosetViewController : UIViewController
 
 @property (nonatomic, strong) PFObject *closet;
+@property (nonatomic, strong) PFUser *user;
 
 @end
