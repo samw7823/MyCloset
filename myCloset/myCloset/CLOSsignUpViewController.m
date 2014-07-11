@@ -60,6 +60,7 @@
             NSLog(@"There is current user");
             //set up tabbar view controller
             CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
+            UINavigationController *profNav = [[UINavigationController alloc] initWithRootViewController:profvc];
             profvc.title = @"Profile";
             
             
@@ -77,7 +78,7 @@
             UITabBarController *tbc = [[UITabBarController alloc] init];
             
             //TODO: Do we want logout on the tab bar or only on profile?
-            tbc.viewControllers = @[profvc, camNav, searchvc, invenvc];
+            tbc.viewControllers = @[profNav, camNav, searchvc, invenvc];
             //        UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logOut)];
             //        [tbc setToolbarItems:@[logout]];
             tbc.delegate = (CLOSAppDelegate *)[[UIApplication sharedApplication] delegate];

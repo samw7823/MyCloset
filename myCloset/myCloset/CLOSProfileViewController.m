@@ -10,12 +10,12 @@
 #import <Parse/Parse.h>
 #import "CLOSClosetCell.h"
 #import "CLOSCreateClosetViewController.h"
+#import "CLOSIndividualClosetViewController.h"
 
 @interface CLOSProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) PFUser *user;
 @property (strong, nonatomic) NSArray *myClosets;
-@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
 @end
 
@@ -37,7 +37,12 @@
     
     self.user = [PFUser currentUser];
     NSString *username = [NSString stringWithFormat:@"%@'s closets",self.user.username];
-    self.navBar.topItem.title = username;
+    //self.navBar.topItem.title = username;
+    //self.navigationController.title = username;
+    self.navigationItem.title = username;
+    
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCloset:)];
+    self.navigationItem.rightBarButtonItem = addButton;
     
     UINib *cellNib = [UINib nibWithNibName:@"CLOSClosetCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ClosetCell"];
@@ -92,6 +97,14 @@
     //TODO: set cell properties to current user
     
     return cell;
+}
+
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PFObject *closet = self.myClosets[indexPath.row];
+    CLOSIndividualClosetViewController *individualvc = [[CLOSIndividualClosetViewController alloc] init];
+    individualvc.closet = closet;
+    [self.navigationController pushViewController:individualvc animated:YES];
 }
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

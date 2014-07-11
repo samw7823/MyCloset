@@ -7,7 +7,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CLOSProfileViewController">
             <connections>
                 <outlet property="collectionView" destination="D2z-Wz-gHC" id="A3M-tw-mIs"/>
-                <outlet property="navBar" destination="jsS-PR-I3K" id="W5M-y3-v5r"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,6 +18,7 @@
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="D2z-Wz-gHC">
                     <rect key="frame" x="0.0" y="60" width="320" height="459"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZBc-68-IlL">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -31,19 +31,6 @@
                         <outlet property="delegate" destination="-1" id="5Ln-1R-PEM"/>
                     </connections>
                 </collectionView>
-                <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jsS-PR-I3K">
-                    <rect key="frame" x="0.0" y="16" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <items>
-                        <navigationItem title="Title" id="m49-f5-pGd">
-                            <barButtonItem key="rightBarButtonItem" systemItem="add" id="NXW-Mr-5jf">
-                                <connections>
-                                    <action selector="addCloset:" destination="-1" id="7en-dZ-QG4"/>
-                                </connections>
-                            </barButtonItem>
-                        </navigationItem>
-                    </items>
-                </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
