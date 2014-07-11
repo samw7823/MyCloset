@@ -7,7 +7,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CLOSAddItemToClosetViewController">
             <connections>
                 <outlet property="cancelButton" destination="Qh9-iU-OCb" id="GNc-ZZ-rtE"/>
+                <outlet property="collectionView" destination="kuc-sH-n71" id="rnC-Mb-1Ai"/>
                 <outlet property="doneButton" destination="7TH-Vh-DhQ" id="Z05-22-QUp"/>
+                <outlet property="navBar" destination="ZAb-CC-aUT" id="n2I-pc-Bxd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,6 +28,10 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="elK-HG-YtC"/>
+                        <outlet property="delegate" destination="-1" id="4CI-C6-5Cd"/>
+                    </connections>
                 </collectionView>
                 <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZAb-CC-aUT">
                     <rect key="frame" x="0.0" y="21" width="320" height="44"/>

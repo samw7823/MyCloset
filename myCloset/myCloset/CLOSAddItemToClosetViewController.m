@@ -47,6 +47,17 @@
     
     // Do any additional setup after loading the view from its nib.
     
+    UINib *cellNib = [UINib nibWithNibName:@"CLOSClosetCell" bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ClosetCell"];
+    NSLog(@"registered nib");
+
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setItemSize:CGSizeMake(150, 150)];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    
+    [self.collectionView setCollectionViewLayout:flowLayout];
+git 
+    
     self.user = [PFUser currentUser];
     PFQuery *closetsQuery = [PFQuery queryWithClassName:@"Closet"];
     [closetsQuery whereKey:@"owner" equalTo:self.user];
@@ -57,48 +68,48 @@
     self.navBar.topItem.title = username;
     
     
-    UINib *cellNib = [UINib nibWithNibName:@"CLOSClosetCell" bundle:nil];
-    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ClosetCell"];
+
     
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(150, 150)];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    
-    [self.collectionView setCollectionViewLayout:flowLayout];
 
     
 }
 
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    //TODO: cell not getting dequeued!!!
+    
     UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"ClosetCell" forIndexPath:indexPath];
+    NSLog(@"Dequeuing a cell");
+//    if (cell == nil) {
+//        cell = [[CLOSClosetCell alloc] init];
+//    }
     
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:100];
     
-    [titleLabel setText:@"closet"];
+    PFObject *closet = (PFObject *)self.myClosets[indexPath.row];
+    titleLabel.text = closet[@"name"];
     
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:50];
     [imageView setImage:[UIImage imageNamed:@"closetDoor.png"]];
-    
-    PFObject *closet = (PFObject *)self.myClosets[indexPath.row];
-    titleLabel.text = closet[@"name"];
+
     
     //TODO: set cell properties to current user
     
     return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    //TODO: get the selected cell, and the closet name associated with teh selected cell
-    // then add the item object that is passed to that closet.
-    
-
-}
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    //TODO: get the selected cell, and the closet name associated with teh selected cell
+//    // then add the item object that is passed to that closet.
+//    
+//
+//}
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.user[@"ownedClosets"] count];
+    return [self.myClosets count];
 }
 
 
