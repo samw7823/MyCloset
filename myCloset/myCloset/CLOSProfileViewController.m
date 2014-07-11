@@ -14,6 +14,7 @@
 @interface CLOSProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) PFUser *user;
+@property (strong, nonatomic) NSArray *myClosets;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
 @end
@@ -37,7 +38,6 @@
     self.user = [PFUser currentUser];
     NSString *username = [NSString stringWithFormat:@"%@'s closets",self.user.username];
     self.navBar.topItem.title = username;
-
     
     UINib *cellNib = [UINib nibWithNibName:@"CLOSClosetCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ClosetCell"];
@@ -56,6 +56,14 @@
 {
     [super viewWillAppear:animated];
     
+    PFQuery *closetsQuery = [PFQuery queryWithClassName:@"Closet"];
+    [closetsQuery whereKey:@"owner" equalTo:self.user];
+    [closetsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.myClosets = objects;
+        [self.collectionView reloadData];
+    }];
+
+    
     [self.collectionView reloadData];
     [self.user saveInBackground];
 }
@@ -72,7 +80,10 @@
     
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:100];
     
-    [titleLabel setText:@"closet"];
+    PFObject *closet = self.myClosets[indexPath.row];
+    
+    NSString *closetName = closet[@"name"];
+    [titleLabel setText:closetName];
     
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:50];
     [imageView setImage:[UIImage imageNamed:@"closetDoor.png"]];
@@ -85,7 +96,7 @@
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-     return [self.user[@"ownedClosets"] count];
+    return [self.myClosets count];
 }
 
 - (void)didReceiveMemoryWarning
