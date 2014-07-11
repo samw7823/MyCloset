@@ -37,8 +37,6 @@
     
     self.user = [PFUser currentUser];
     NSString *username = [NSString stringWithFormat:@"%@'s closets",self.user.username];
-    //self.navBar.topItem.title = username;
-    //self.navigationController.title = username;
     self.navigationItem.title = username;
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCloset:)];
@@ -61,6 +59,7 @@
 {
     [super viewWillAppear:animated];
     
+    //TODO: figure out ordering of closets
     PFQuery *closetsQuery = [PFQuery queryWithClassName:@"Closet"];
     [closetsQuery whereKey:@"owner" equalTo:self.user];
     [closetsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
