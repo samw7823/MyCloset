@@ -12,6 +12,8 @@
 #import "CLOSSearchViewController.h"
 #import "CLOSCameraViewController.h"
 #import "CLOSInventoryViewController.h"
+#import "CLOSAppDelegate.h"
+
 #import <Parse/Parse.h>
 
 @interface CLOSsignUpViewController () <UITextFieldDelegate>
@@ -55,11 +57,17 @@
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Signed Up");
-            //TODO: Bring out tab bar once logged in; possibly using NAVIGATION CONTROLLER
+            NSLog(@"There is current user");
+            //set up tabbar view controller
             CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
             profvc.title = @"Profile";
+            
+            
             CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
-            camvc.title = @"Camera";
+            UINavigationController *camNav = [[UINavigationController alloc] initWithRootViewController:camvc];
+            camNav.title = @"Camera";
+            
+            
             CLOSSearchViewController *searchvc = [[CLOSSearchViewController alloc] init];
             searchvc.title = @"Search";
             CLOSInventoryViewController *invenvc = [[CLOSInventoryViewController alloc] init];
@@ -68,15 +76,17 @@
             
             UITabBarController *tbc = [[UITabBarController alloc] init];
             
-            tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
-            
-            
+            //TODO: Do we want logout on the tab bar or only on profile?
+            tbc.viewControllers = @[profvc, camNav, searchvc, invenvc];
+            //        UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logOut)];
+            //        [tbc setToolbarItems:@[logout]];
+            tbc.delegate = (CLOSAppDelegate *)[[UIApplication sharedApplication] delegate];
             [self presentViewController:tbc animated:YES completion:nil];
         } else {
             NSLog(@"Sign up failed with error: %@", error);
         }
     }];
-
+    
 }
 
 
