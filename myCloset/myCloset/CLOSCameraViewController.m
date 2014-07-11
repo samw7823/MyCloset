@@ -8,8 +8,11 @@
 
 #import "CLOSCameraViewController.h"
 #import "CLOSCreateItemViewController.h"
+#import "CLOSAppDelegate.h"
 
 @interface CLOSCameraViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+
+@property (nonatomic) UIImagePickerController *imagePicker;
 
 @end
 
@@ -33,22 +36,36 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     
-    //TODO: fix cancelling remakes the imagePicker
     [super viewDidAppear:animated];
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.allowsEditing = YES;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera || UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        UIBarButtonItem *switchButton = [[UIBarButtonItem alloc] initWithTitle: @"to Photos" style: UIBarButtonItemStylePlain target:self action:@selector(switchCamera:)];
+        imagePicker.toolbarItems = @[switchButton];
     } else {
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
     imagePicker.delegate = self;
+    self.imagePicker = imagePicker;
     self.hidesBottomBarWhenPushed = YES;
     [self presentViewController:imagePicker animated:YES completion:NULL];
 
     
 }
 
+-(void)switchCamera:(id)sender
+{
+    if ([((UIBarButtonItem *)sender).title isEqual:@"to Photos"]) {
+        self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        ((UIBarButtonItem *)sender).title = @"to Camera";
+    } else {
+        self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        ((UIBarButtonItem *)sender).title = @"to Photos";
+
+    }
+}
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     //Get picked image from info dictionary and create a new item
@@ -62,7 +79,18 @@
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    //TODO:do stuff here
+    
+    int previousIndex = ((CLOSAppDelegate *)[[UIApplication sharedApplication] delegate]).previousIndex;
+    if (self.tabBarController) {
+    [self.tabBarController setSelectedIndex:previousIndex];
+    
+        [self.tabBarController dismissViewControllerAnimated:YES completion:^{
+            
+            self.tabBarController.selectedViewController.hidesBottomBarWhenPushed = NO;
+        }];
+    } else {
+        NSLog(@"Image picker cannot dismiss properly: missing tabbarcontroller");
+    }
 }
 
 - (void)didReceiveMemoryWarning
