@@ -39,6 +39,8 @@
     
     if (self.presentingViewController.presentingViewController) {
         
+        //create and store item here
+        
         //TODO: give closet view the information it needs
         CLOSIndividualClosetViewController *closetvc = [[CLOSIndividualClosetViewController alloc] init];
         

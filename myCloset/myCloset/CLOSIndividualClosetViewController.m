@@ -12,7 +12,7 @@
 @interface CLOSIndividualClosetViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
+@property (strong, nonatomic) NSArray *items;
 
 @end
 
@@ -50,25 +50,36 @@
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItem:)];
     self.navigationItem.rightBarButtonItem = addButton;
+
     
-    
-    //TODO: move this code to be run after a new item is created so that it is added to a certain closet
+    /* creating a new item */
     PFObject *sampleItem = [[PFObject alloc] initWithClassName:@"Item"];
-    //        sampleItem[@"itemOwner"] = [PFUser currentUser];
     sampleItem[@"name"] = @"Rachel's item ";
+    
+    PFRelation *itemToUser = [sampleItem relationForKey:@"owner"];
+    [itemToUser addObject:[PFUser currentUser]];
+    
     [sampleItem save];
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Closet"];
-    PFObject *closetToAddTo = [query getObjectWithId:self.closet.objectId];
-    [closetToAddTo addObject:sampleItem forKey:@"itemsInCloset"];
-    [closetToAddTo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        self.closet = closetToAddTo;
+    PFRelation *closetToItems = [self.closet relationForKey:@"items"];
+    [closetToItems addObject:sampleItem];
+    [self.closet save];
+    /* end creating a new item */
+    
+
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    //TODO: move this code to be run after a new item is created so that it is added to a certain closet
+    PFRelation *relation = [self.closet relationForKey:@"items"]; //change to specific closet
+    PFQuery *query = [relation query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.items = objects;
         [self.collectionView reloadData];
     }];
     
     // end TODO
-    
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,8 +94,7 @@
     
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:100];
    // [titleLabel setText:@"ITEM"];
-    NSArray *items = self.closet[@"itemsInCloset"];
-    PFObject *item = items[indexPath.row];
+    PFObject *item = self.items[indexPath.row];
     
     NSString *itemName = item[@"name"];
     [titleLabel setText:itemName];
@@ -108,7 +118,7 @@
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self.closet[@"itemsInCloset"] count];
+    return [self.items count];
 }
 
 @end

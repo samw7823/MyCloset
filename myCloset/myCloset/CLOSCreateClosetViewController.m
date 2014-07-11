@@ -32,7 +32,10 @@
     
     PFObject *closet = [PFObject objectWithClassName:@"Closet"];
     closet[@"name"] = self.nameTextField.text;
-    closet[@"owner"] = u;
+    
+    PFRelation *closetToOwner = [closet relationForKey:@"owner"];
+    [closetToOwner addObject:u];
+    
     [closet save];
 
     PFRelation *relation = [u relationForKey:@"ownedClosets"];
@@ -41,12 +44,9 @@
    // PFFile *file = [PFFile fileWithName:@"closetDoorImage" contentsAtPath:[[NSBundle mainBundle] pathForResource:@"closetDoor" ofType:@".png"]];
     //closet[@"image"] = file;
     
-//    [closet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//         [self dismissViewControllerAnimated:YES completion:NULL];
-//    }];
-        [u saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-             [self dismissViewControllerAnimated:YES completion:NULL];
-        }];
+    [u saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [self dismissViewControllerAnimated:YES completion:NULL];
+    }];
     
     
     
