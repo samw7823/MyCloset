@@ -35,6 +35,7 @@
 {
     [super viewDidLoad];
     
+    //TODO: change if not current user's profile
     self.user = [PFUser currentUser];
     NSString *username = [NSString stringWithFormat:@"%@'s closets",self.user.username];
     self.navigationItem.title = username;
@@ -60,12 +61,19 @@
     [super viewWillAppear:animated];
     
     //TODO: figure out ordering of closets
-    PFQuery *closetsQuery = [PFQuery queryWithClassName:@"Closet"];
-    [closetsQuery whereKey:@"owner" equalTo:self.user];
-    [closetsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    PFRelation *relation = [self.user relationForKey:@"ownedClosets"];
+    PFQuery *query = [relation query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         self.myClosets = objects;
         [self.collectionView reloadData];
     }];
+    
+   // PFQuery *closetsQuery = [PFQuery queryWithClassName:@"Closet"];
+   // [closetsQuery whereKey:@"owner" equalTo:self.user];
+   // [closetsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+   //     self.myClosets = objects;
+   //     [self.collectionView reloadData];
+   // }];
 
     
     [self.collectionView reloadData];

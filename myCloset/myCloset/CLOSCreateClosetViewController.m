@@ -32,14 +32,21 @@
     
     PFObject *closet = [PFObject objectWithClassName:@"Closet"];
     closet[@"name"] = self.nameTextField.text;
-    closet[@"owner"] = currentUser;
+    [closet save];
+    PFUser *u = [PFUser currentUser];
+    PFRelation *relation = [u relationForKey:@"ownedClosets"];
+    [relation addObject:closet];
+    //closet[@"owner"] = currentUser;
     //TODO: allow user to choose own image
    // PFFile *file = [PFFile fileWithName:@"closetDoorImage" contentsAtPath:[[NSBundle mainBundle] pathForResource:@"closetDoor" ofType:@".png"]];
     //closet[@"image"] = file;
     
-    [closet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-         [self dismissViewControllerAnimated:YES completion:NULL];
-    }];
+//    [closet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//         [self dismissViewControllerAnimated:YES completion:NULL];
+//    }];
+        [u saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+             [self dismissViewControllerAnimated:YES completion:NULL];
+        }];
     
     
     
