@@ -32,6 +32,8 @@
 }
 -(void)viewDidAppear:(BOOL)animated
 {
+    
+    //TODO: fix cancelling remakes the imagePicker
     [super viewDidAppear:animated];
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.allowsEditing = YES;
@@ -58,6 +60,10 @@
     
 }
 
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    //TODO:do stuff here
+}
 
 - (void)didReceiveMemoryWarning
 {
