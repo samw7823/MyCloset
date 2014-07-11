@@ -30,6 +30,8 @@
 		138A7C8D196F0BBE008AD0E9 /* CLOSCreateItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 138A7C8B196F0BBE008AD0E9 /* CLOSCreateItemViewController.xib */; };
 		138A7C90196F2669008AD0E9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138A7C8E196F2669008AD0E9 /* Accounts.framework */; };
 		138A7C91196F2669008AD0E9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138A7C8F196F2669008AD0E9 /* Social.framework */; };
+		BF1571871970497500069252 /* CLOSAddItemToClosetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1571851970497500069252 /* CLOSAddItemToClosetViewController.m */; };
+		BF1571881970497500069252 /* CLOSAddItemToClosetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF1571861970497500069252 /* CLOSAddItemToClosetViewController.xib */; };
 		BF939ECF196F364300BBEC72 /* CLOSClosetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BF939ECE196F364300BBEC72 /* CLOSClosetCell.m */; };
 		BF939ED1196F3A4400BBEC72 /* closetDoor.png in Resources */ = {isa = PBXBuildFile; fileRef = BF939ED0196F3A4400BBEC72 /* closetDoor.png */; };
 		BF939ED3196F3B7C00BBEC72 /* CLOSClosetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF939ED2196F3B7C00BBEC72 /* CLOSClosetCell.xib */; };
@@ -102,6 +104,9 @@
 		138A7C8B196F0BBE008AD0E9 /* CLOSCreateItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLOSCreateItemViewController.xib; sourceTree = "<group>"; };
 		138A7C8E196F2669008AD0E9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		138A7C8F196F2669008AD0E9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		BF1571841970497500069252 /* CLOSAddItemToClosetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLOSAddItemToClosetViewController.h; sourceTree = "<group>"; };
+		BF1571851970497500069252 /* CLOSAddItemToClosetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLOSAddItemToClosetViewController.m; sourceTree = "<group>"; };
+		BF1571861970497500069252 /* CLOSAddItemToClosetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLOSAddItemToClosetViewController.xib; sourceTree = "<group>"; };
 		BF939ECD196F364300BBEC72 /* CLOSClosetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLOSClosetCell.h; path = ../CLOSClosetCell.h; sourceTree = "<group>"; };
 		BF939ECE196F364300BBEC72 /* CLOSClosetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLOSClosetCell.m; path = ../CLOSClosetCell.m; sourceTree = "<group>"; };
 		BF939ED0196F3A4400BBEC72 /* closetDoor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closetDoor.png; sourceTree = "<group>"; };
@@ -232,6 +237,9 @@
 				138A7C63196F0AE5008AD0E9 /* CLOSProfileViewController.h */,
 				138A7C64196F0AE5008AD0E9 /* CLOSProfileViewController.m */,
 				138A7C65196F0AE5008AD0E9 /* CLOSProfileViewController.xib */,
+				BF1571841970497500069252 /* CLOSAddItemToClosetViewController.h */,
+				BF1571851970497500069252 /* CLOSAddItemToClosetViewController.m */,
+				BF1571861970497500069252 /* CLOSAddItemToClosetViewController.xib */,
 				138A7C68196F0B01008AD0E9 /* CLOSSearchViewController.h */,
 				138A7C69196F0B01008AD0E9 /* CLOSSearchViewController.m */,
 				138A7C6A196F0B01008AD0E9 /* CLOSSearchViewController.xib */,
@@ -367,6 +375,7 @@
 				BF939ED3196F3B7C00BBEC72 /* CLOSClosetCell.xib in Resources */,
 				138A7C8D196F0BBE008AD0E9 /* CLOSCreateItemViewController.xib in Resources */,
 				138A7C7E196F0B98008AD0E9 /* CLOSItemViewController.xib in Resources */,
+				BF1571881970497500069252 /* CLOSAddItemToClosetViewController.xib in Resources */,
 				138A7C74196F0B5A008AD0E9 /* CLOSInventoryViewController.xib in Resources */,
 				BF939ED1196F3A4400BBEC72 /* closetDoor.png in Resources */,
 				EAC0B32D196F04DA004E310D /* InfoPlist.strings in Resources */,
@@ -409,6 +418,7 @@
 				138A7C73196F0B5A008AD0E9 /* CLOSInventoryViewController.m in Sources */,
 				138A7C87196F0BB4008AD0E9 /* CLOSCreateClosetViewController.m in Sources */,
 				BF939ECF196F364300BBEC72 /* CLOSClosetCell.m in Sources */,
+				BF1571871970497500069252 /* CLOSAddItemToClosetViewController.m in Sources */,
 				138A7C61196F0A26008AD0E9 /* CLOSsignUpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
