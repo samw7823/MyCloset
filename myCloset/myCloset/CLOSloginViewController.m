@@ -13,6 +13,7 @@
 #import "CLOSCameraViewController.h"
 #import "CLOSInventoryViewController.h"
 #import "CLOSsignUpViewController.h"
+#import "CLOSAppDelegate.h"
 
 #import <Parse/Parse.h>
 
@@ -46,25 +47,32 @@
     [PFUser logInWithUsername:self.username.text password:self.password.text error: &error];
     
     if ([PFUser currentUser]) {
-        
         NSLog(@"There is current user");
-    //TODO: Bring out tab bar once logged in; possibly using NAVIGATION CONTROLLER
-    CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
-    profvc.title = @"Profile";
-    CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
-    camvc.title = @"Camera";
-    CLOSSearchViewController *searchvc = [[CLOSSearchViewController alloc] init];
-    searchvc.title = @"Search";
-    CLOSInventoryViewController *invenvc = [[CLOSInventoryViewController alloc] init];
-    invenvc.title = @"Inventory";
-    
-    
-    UITabBarController *tbc = [[UITabBarController alloc] init];
-    
-    tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
-    
-    
-    [self presentViewController:tbc animated:YES completion:nil];
+        //set up tabbar view controller
+        CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
+        profvc.title = @"Profile";
+        
+        
+        CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
+        UINavigationController *camNav = [[UINavigationController alloc] initWithRootViewController:camvc];
+        camNav.title = @"Camera";
+        
+        
+        CLOSSearchViewController *searchvc = [[CLOSSearchViewController alloc] init];
+        searchvc.title = @"Search";
+        CLOSInventoryViewController *invenvc = [[CLOSInventoryViewController alloc] init];
+        invenvc.title = @"Inventory";
+        
+        
+        UITabBarController *tbc = [[UITabBarController alloc] init];
+        
+        //TODO: Do we want logout on the tab bar or only on profile?
+        tbc.viewControllers = @[profvc, camNav, searchvc, invenvc];
+        //        UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logOut)];
+        //        [tbc setToolbarItems:@[logout]];
+        tbc.delegate = (CLOSAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [self presentViewController:tbc animated:YES completion:nil];
+
 
     } else {
         NSLog(@"Error logging in: %@", error);
@@ -88,6 +96,43 @@
 
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    //redirecting to tab bar
+    PFUser *currentUser = [PFUser currentUser];
+    
+    //Is user cached?
+    if (currentUser) {
+        NSLog(@"There is current user");
+        //set up tabbar view controller
+        CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
+        profvc.title = @"Profile";
+        
+        
+        CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
+        UINavigationController *camNav = [[UINavigationController alloc] initWithRootViewController:camvc];
+        camNav.title = @"Camera";
+        
+        
+        CLOSSearchViewController *searchvc = [[CLOSSearchViewController alloc] init];
+        searchvc.title = @"Search";
+        CLOSInventoryViewController *invenvc = [[CLOSInventoryViewController alloc] init];
+        invenvc.title = @"Inventory";
+        
+        
+        UITabBarController *tbc = [[UITabBarController alloc] init];
+        
+        //TODO: Do we want logout on the tab bar or only on profile?
+        tbc.viewControllers = @[profvc, camNav, searchvc, invenvc];
+        //        UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logOut)];
+        //        [tbc setToolbarItems:@[logout]];
+        tbc.delegate = (CLOSAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [self presentViewController:tbc animated:YES completion:nil];
+    }
+
+}
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -103,31 +148,6 @@
                                    initWithTarget:self
                                    action:@selector(backgroundTouched)];
     [self.view addGestureRecognizer:tap];
-    PFUser *currentUser = [PFUser currentUser];
-    
-    //Is user cached?
-    if (currentUser) {
-        NSLog(@"There is current user");
-        //set up tabbar view controller
-        CLOSProfileViewController *profvc = [[CLOSProfileViewController alloc] init];
-        profvc.title = @"Profile";
-        CLOSCameraViewController *camvc = [[CLOSCameraViewController alloc] init];
-        camvc.title = @"Camera";
-        CLOSSearchViewController *searchvc = [[CLOSSearchViewController alloc] init];
-        searchvc.title = @"Search";
-        CLOSInventoryViewController *invenvc = [[CLOSInventoryViewController alloc] init];
-        invenvc.title = @"Inventory";
-        
-        
-        UITabBarController *tbc = [[UITabBarController alloc] init];
-        
-        //TODO: Do we want logout on the tab bar or only on profile?
-//        tbc.viewControllers = @[profvc, camvc, searchvc, invenvc];
-//        UIBarButtonItem *logout = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logOut)];
-//        [tbc setToolbarItems:@[logout]];
-        
-        [self presentViewController:tbc animated:YES completion:nil];
-    }
 
 }
 

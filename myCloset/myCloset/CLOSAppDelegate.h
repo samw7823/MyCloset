@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CLOSAppDelegate : UIResponder <UIApplicationDelegate>
+@interface CLOSAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, assign) int previousIndex;
 
 @end

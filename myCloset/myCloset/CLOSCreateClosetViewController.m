@@ -34,18 +34,24 @@
     closet[@"name"] = self.nameTextField.text;
     closet[@"owner"] = currentUser;
     //TODO: allow user to choose own image
-    PFFile *file = [PFFile fileWithName:@"closetDoorImage" contentsAtPath:[[NSBundle mainBundle] pathForResource:@"closetDoor" ofType:@".png"]];
-    closet[@"image"] = file;
+   // PFFile *file = [PFFile fileWithName:@"closetDoorImage" contentsAtPath:[[NSBundle mainBundle] pathForResource:@"closetDoor" ofType:@".png"]];
+    //closet[@"image"] = file;
+    
+    [closet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+         [self dismissViewControllerAnimated:YES completion:NULL];
+    }];
+    
+    
     
 //    [closet saveInBackground];
-    [closet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        NSLog(@"saved");
-        [currentUser setObject:closet forKey:@"assocCloset"];
-//        [currentUser addObject:closet forKey:@"ownedClosets"];
-        [currentUser saveEventually:^(BOOL succeeded, NSError *error) {
-            NSLog(@"err? %@, succ? %@", error, succeeded ? @"Y" : @"N");
-        }];
-    }];
+//    [closet saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        NSLog(@"saved");
+//        [currentUser setObject:closet forKey:@"assocCloset"];
+////        [currentUser addObject:closet forKey:@"ownedClosets"];
+//        [currentUser saveEventually:^(BOOL succeeded, NSError *error) {
+//            NSLog(@"err? %@, succ? %@", error, succeeded ? @"Y" : @"N");
+//        }];
+//    }];
     
 //    NSArray *usersClosets = [currentUser objectForKey:@"ownedClosets"];
 //    NSMutableArray *mutableUsersClosets;
@@ -62,7 +68,7 @@
 
 
     
-    [self dismissViewControllerAnimated:YES completion:NULL];
+   
 }
 
 - (IBAction)cancelPressed:(id)sender
