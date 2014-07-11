@@ -9,10 +9,12 @@
 #import "CLOSProfileViewController.h"
 #import <Parse/Parse.h>
 #import "CLOSClosetCell.h"
+#import "CLOSCreateClosetViewController.h"
 
 @interface CLOSProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) PFUser *user;
+@property (strong, nonatomic) NSArray *myClosets;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
 @end
@@ -36,7 +38,6 @@
     self.user = [PFUser currentUser];
     NSString *username = [NSString stringWithFormat:@"%@'s closets",self.user.username];
     self.navBar.topItem.title = username;
-
     
     UINib *cellNib = [UINib nibWithNibName:@"CLOSClosetCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"ClosetCell"];
@@ -47,6 +48,30 @@
     
     [self.collectionView setCollectionViewLayout:flowLayout];
     
+
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    PFQuery *closetsQuery = [PFQuery queryWithClassName:@"Closet"];
+    [closetsQuery whereKey:@"owner" equalTo:self.user];
+    [closetsQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.myClosets = objects;
+        [self.collectionView reloadData];
+    }];
+
+    
+    [self.collectionView reloadData];
+    [self.user saveInBackground];
+}
+
+- (IBAction)addCloset:(id)sender
+{
+    CLOSCreateClosetViewController *createClosetvc = [[CLOSCreateClosetViewController alloc] init];
+    [self presentViewController:createClosetvc animated:YES completion:NULL];
 }
 
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -55,7 +80,10 @@
     
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:100];
     
-    [titleLabel setText:@"closet"];
+    PFObject *closet = self.myClosets[indexPath.row];
+    
+    NSString *closetName = closet[@"name"];
+    [titleLabel setText:closetName];
     
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:50];
     [imageView setImage:[UIImage imageNamed:@"closetDoor.png"]];
@@ -68,8 +96,7 @@
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 15;
-    // TODO: return [self.user[@"Closets] count];
+    return [self.myClosets count];
 }
 
 - (void)didReceiveMemoryWarning
