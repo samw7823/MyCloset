@@ -9,6 +9,7 @@
 #import "CLOSCreateItemViewController.h"
 #import "CLOSCreateClosetViewController.h"
 #import "CLOSIndividualClosetViewController.h"
+#import "CLOSAddItemToClosetViewController.h"
 @interface CLOSCreateItemViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
@@ -52,6 +53,10 @@
         }];
     }
     
+}
+- (IBAction)addToCloset:(id)sender {
+    CLOSAddItemToClosetViewController *addItemvc = [[CLOSAddItemToClosetViewController alloc] init];
+    [self presentViewController:addItemvc animated:YES completion:NULL];
 }
 
 - (void)didReceiveMemoryWarning

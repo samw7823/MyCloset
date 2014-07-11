@@ -6,7 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CLOSAddItemToClosetViewController">
             <connections>
-                <outlet property="addCloset" destination="w7E-PU-9hH" id="Trg-tN-ttP"/>
+                <outlet property="cancelButton" destination="Qh9-iU-OCb" id="GNc-ZZ-rtE"/>
+                <outlet property="doneButton" destination="7TH-Vh-DhQ" id="Z05-22-QUp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kuc-sH-n71">
-                    <rect key="frame" x="0.0" y="65" width="320" height="503"/>
+                    <rect key="frame" x="0.0" y="65" width="320" height="459"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ShL-zL-huI">
                         <size key="itemSize" width="50" height="50"/>
@@ -31,7 +32,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <items>
                         <navigationItem id="FMI-oa-pql">
-                            <barButtonItem key="leftBarButtonItem" systemItem="edit" id="P6s-rr-4RM"/>
+                            <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Qh9-iU-OCb"/>
                             <barButtonItem key="rightBarButtonItem" systemItem="add" id="w7E-PU-9hH">
                                 <connections>
                                     <action selector="addItemCloset:" destination="-1" id="gbU-mz-ult"/>
@@ -40,6 +41,13 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a1X-UR-CCn">
+                    <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <items>
+                        <barButtonItem systemItem="done" id="7TH-Vh-DhQ"/>
+                    </items>
+                </toolbar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

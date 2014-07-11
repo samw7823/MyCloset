@@ -17,8 +17,9 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) PFUser *user;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
-@property (nonatomic, getter=isSelected) BOOL selected;
-
+@property (strong, nonatomic) NSArray *myClosets;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 
 @end
@@ -34,6 +35,7 @@
     return self;
 }
 - (IBAction)addItemCloset:(id)sender {
+    //Switch to create closet view control
     CLOSCreateClosetViewController *createClosetvc = [[CLOSCreateClosetViewController alloc] init];
     [self presentViewController:createClosetvc animated:YES completion:NULL];
 
@@ -45,9 +47,12 @@
     
     // Do any additional setup after loading the view from its nib.
     
-    
-    
     self.user = [PFUser currentUser];
+    PFQuery *closetsQuery = [PFQuery queryWithClassName:@"Closet"];
+    [closetsQuery whereKey:@"owner" equalTo:self.user];
+    self.myClosets = [[closetsQuery findObjects] copy];
+
+
     NSString *username = [NSString stringWithFormat:@"%@'s closets",self.user.username];
     self.navBar.topItem.title = username;
     
@@ -75,15 +80,21 @@
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:50];
     [imageView setImage:[UIImage imageNamed:@"closetDoor.png"]];
     
-    //TODO: get the selected cell, and the closet name associated with teh selected cell
-    // then 
-    
+    PFObject *closet = (PFObject *)self.myClosets[indexPath.row];
+    titleLabel.text = closet[@"name"];
     
     //TODO: set cell properties to current user
     
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    //TODO: get the selected cell, and the closet name associated with teh selected cell
+    // then add the item object that is passed to that closet.
+    
+
+}
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
